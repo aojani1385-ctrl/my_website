@@ -1,0 +1,66 @@
+: 'bg-gradient-to-br from-blue-400 to-purple-400 text-white shadow-md'
+              }`}
+            >
+              {num}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-4 gap-2 mb-6">
+          {['+', '-', '*', '/'].map((op) => (
+            <button
+              key={op}
+              onClick={() => handleOperator(op)}
+              disabled={selected.length !== 2 || isWon}
+              className={`h-16 text-3xl font-bold rounded-xl transition-all ${
+                selected.length === 2 && !isWon
+                  ? 'bg-orange-500 text-white hover:bg-orange-600 shadow-lg'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              {op}
+            </button>
+          ))}
+        </div>
+
+        {message && (
+          <div className={`p-4 rounded-xl mb-4 text-center font-bold ${
+            isWon ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+          }`}>
+            {message}
+          </div>
+        )}
+
+        <div className="flex gap-3">
+          {isWon && (
+            <button
+              onClick={nextLevel}
+              className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+            >
+              مرحله بعد
+            </button>
+          )}
+          <button
+            onClick={generatePuzzle}
+            className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+          >
+            پازل جدید
+          </button>
+          <button
+            onClick={reset}
+            className="bg-gray-500 text-white py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all"
+          >
+            <RotateCcw size={24} />
+          </button>
+        </div>
+
+        <div className="mt-6 p-4 bg-purple-50 rounded-xl text-sm text-gray-700">
+          <p className="font-bold mb-2">راهنما:</p>
+          <p>• دو عدد انتخاب کن</p>
+          <p>• یک عملگر (+، -، *، /) انتخاب کن</p>
+          <p>• سعی کن به عدد هدف برسی!</p>
+        </div>
+      </div>
+    </div>
+  );
+}
